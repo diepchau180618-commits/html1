@@ -1,0 +1,208 @@
+/* ==========================================================================
+   JOLLIBEE SHOWCASE - CUSTOM ANIMATIONS & RESPONSIVE EXTENSIONS
+   Kết hợp cùng Tailwind CSS để tạo hiệu ứng mượt mà và tối ưu trên Mobile/PC
+   ========================================================================== */
+
+/* ================= 1. KEYFRAME ANIMATIONS (HIỆU ỨNG CHUYỂN ĐỘNG) ================= */
+
+/* Hiệu ứng trôi nổi nhẹ nhàng cho hình ảnh đĩa gà chính ở Hero */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+/* Hiệu ứng nhấp nhô cho các huy hiệu badge bay xung quanh Hero */
+@keyframes bobbing {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+@keyframes bobbingDelay {
+  0% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Hiệu ứng bồng bềnh cho Linh vật Mascot Chú Ong góc màn hình */
+@keyframes mascotFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+/* Hiệu ứng xuất hiện phóng to mềm mại cho các Modal Dialog */
+@keyframes modalZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hiệu ứng bóng khí chat xuất hiện */
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hiệu ứng trượt Toast thông báo */
+@keyframes toastIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ================= 2. CLASS TIỆN ÍCH TÙY BIẾN ================= */
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-bobbing {
+  animation: bobbing 3.5s ease-in-out infinite alternate;
+}
+
+.animate-bobbing-delay {
+  animation: bobbingDelay 4s ease-in-out infinite alternate;
+}
+
+.animate-mascot-float {
+  animation: mascotFloat 4s ease-in-out infinite;
+}
+
+.animate-zoom {
+  animation: modalZoom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pop {
+  animation: bubblePop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Ẩn thanh cuộn cho danh mục nhưng vẫn cuộn ngang mượt trên Mobile */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ================= 3. TRẠNG THÁI ACTIVE MENU TRÊN PC & MOBILE ================= */
+
+/* Trạng thái mục đang chọn trên Navbar PC (Phát sáng Vàng Gold) */
+.nav-link.active {
+  color: #FFC000 !important;
+  background-color: rgba(255, 192, 0, 0.15) !important;
+  border-color: rgba(255, 192, 0, 0.4) !important;
+  box-shadow: 0 0 15px rgba(255, 192, 0, 0.25) !important;
+}
+
+/* Trạng thái mục đang chọn trên Thanh Menu dưới đáy Mobile */
+.mobile-nav-item.active {
+  color: #FFC000 !important;
+  transform: translateY(-2px);
+}
+
+.mobile-nav-item.active i {
+  color: #FFC000 !important;
+  filter: drop-shadow(0 0 6px rgba(255, 192, 0, 0.6));
+}
+
+/* ================= 4. THIẾT KẾ THẺ MÓN ĂN & NÚT BẤM ================= */
+
+.food-card {
+  background: rgba(23, 20, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hiệu ứng hover nổi trên PC (Không ảnh hưởng cảm ứng Mobile) */
+@media (hover: hover) {
+  .food-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 192, 0, 0.4);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 192, 0, 0.15);
+    background: rgba(30, 26, 38, 0.95);
+  }
+
+  .food-card:hover .food-img {
+    transform: scale(1.06);
+  }
+}
+
+/* ================= 5. TỐI ƯU GIAO DIỆN RIÊNG BIỆT (RESPONSIVE PC & MOBILE) ================= */
+
+/* --- TỐI ƯU TRÊN MÀN HÌNH DI ĐỘNG (Dưới 768px) --- */
+@media (max-width: 767px) {
+  /* Kích thước mục tiêu chạm ngón tay tối thiểu 44px để bấm dễ dàng */
+  button, a {
+    min-height: 38px;
+  }
+
+  /* Đảm bảo hình ảnh món ăn hiển thị rõ ràng trên màn hình nhỏ */
+  .food-card-img-wrap {
+    height: 170px;
+  }
+
+  /* Giảm khoảng cách lề trên mobile để tận dụng diện tích hiển thị */
+  .container-mobile {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* --- TỐI ƯU TRÊN MÀN HÌNH DESKTOP / PC (Từ 1024px trở lên) --- */
+@media (min-width: 1024px) {
+  .food-card-img-wrap {
+    height: 200px;
+  }
+
+  /* Thanh menu PC dính mượt mà trên cùng với hiệu ứng kính mờ */
+  .header.scrolled {
+    background-color: rgba(14, 12, 18, 0.96);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ================= 6. TOAST THÔNG BÁO TÙY BIẾN ================= */
+.toast-msg {
+  background: rgba(23, 20, 30, 0.95);
+  backdrop-filter: blur(14px);
+  border-left: 4px solid #FFC000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: toastIn 0.3s ease;
+  pointer-events: auto;
+}

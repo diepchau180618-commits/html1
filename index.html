@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chicken Vietnam - Vị Ngon Giòn Rụm, Niềm Vui Lan Tỏa</title>
+  <meta name="description"
+    content="Trải nghiệm hương vị Gà Giòn Vui Vẻ số 1 thế giới cùng Chicken. Đặt món online nhanh chóng, tự phối combo tiết kiệm cùng Trợ lý Ong Vui Vẻ!">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#E31837',
+              redDark: '#A80D24',
+              redLight: '#FF4764',
+              gold: '#FFC000',
+              goldDark: '#D49E00',
+              goldLight: '#FFD54F',
+            },
+            dark: {
+              bg: '#0E0C12',
+              surface: '#17141E',
+              card: 'rgba(30, 26, 38, 0.85)',
+              border: 'rgba(255, 255, 255, 0.1)'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons & Canvas Confetti -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Stylesheet (Animations, Glows & Dedicated Mobile/PC overrides) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+  class="bg-[#0E0C12] text-[#C9C7D4] font-sans antialiased selection:bg-brand-gold selection:text-black pb-20 md:pb-0 overflow-x-hidden">
+
+  <!-- ================= TOP ANNOUNCEMENT TICKER (MOBILE & PC) ================= -->
+  <aside aria-label="Khuyến mãi hot"
+    class="bg-gradient-to-r from-brand-redDark via-brand-red to-brand-redDark text-white py-2 px-4 border-b border-white/10 text-xs sm:text-sm font-medium z-50 sticky top-0 md:relative">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span
+          class="bg-brand-gold text-black font-extrabold px-2 py-0.5 rounded-full text-[11px] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-bolt"></i> Flash Sale
+        </span>
+        <span class="truncate">
+          Đại tiệc gà giòn Chicken - Giảm ngay 15% khi tự phối combo hôm nay!
+        </span>
+      </div>
+      <div class="hidden sm:flex items-center gap-1.5 text-xs text-white/90">
+        <span>Kết thúc sau:</span>
+        <span class="bg-black/50 text-brand-gold font-mono font-bold px-1.5 py-0.5 rounded" id="flash-hours">02</span>:
+        <span class="bg-black/50 text-brand-gold font-mono font-bold px-1.5 py-0.5 rounded"
+          id="flash-minutes">45</span>:
+        <span class="bg-black/50 text-brand-gold font-mono font-bold px-1.5 py-0.5 rounded" id="flash-seconds">18</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= PC / DESKTOP HEADER NAVBAR ================= -->
+  <header
+    class="header sticky top-0 z-40 bg-[#0E0C12]/90 backdrop-blur-xl border-b border-white/10 transition-all duration-300"
+    id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group" id="main-logo">
+        <div
+          class="w-11 h-11 rounded-full overflow-hidden border-2 border-brand-gold shadow-[0_0_15px_rgba(255,192,0,0.4)] bg-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6">
+          <img src="assets/mascot.jpg" alt="Chicken Mascot Logo" class="w-full h-full object-cover">
+        </div>
+        <div class="flex flex-col">
+          <span
+            class="font-heading font-black text-2xl text-brand-redLight tracking-tight leading-none group-hover:text-white transition">Chicken</span>
+          <span class="text-[11px] text-brand-gold font-bold uppercase tracking-widest leading-none mt-1">Lan Tỏa Niềm
+            Vui</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu Links -->
+      <nav class="hidden lg:flex items-center gap-1 bg-white/[0.04] p-1.5 rounded-full border border-white/10"
+        id="nav-menu" aria-label="Menu chính">
+        <a href="#hero"
+          class="nav-link active px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 transition"
+          data-section="hero">
+          <i class="fa-solid fa-house"></i> Trang Chủ
+        </a>
+        <a href="#menu-section"
+          class="nav-link px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 transition text-[#C9C7D4] hover:text-white"
+          data-section="menu-section">
+          <i class="fa-solid fa-drumstick-bite"></i> Thực Đơn
+        </a>
+        <a href="#combo-builder"
+          class="nav-link px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 transition text-[#C9C7D4] hover:text-white"
+          data-section="combo-builder">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Tự Phối Combo
+        </a>
+        <a href="#story-section"
+          class="nav-link px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 transition text-[#C9C7D4] hover:text-white"
+          data-section="story-section">
+          <i class="fa-solid fa-heart"></i> Bí Quyết
+        </a>
+      </nav>
+
+      <!-- Header Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <!-- Sound FX Toggle -->
+        <button type="button"
+          class="w-10 h-10 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/10 text-white flex items-center justify-center transition"
+          id="sound-toggle" title="Bật/Tắt âm thanh hiệu ứng">
+          <i class="fa-solid fa-volume-high text-sm" id="sound-icon"></i>
+        </button>
+
+        <!-- Store Locator Button -->
+        <button type="button"
+          class="hidden md:flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.14] border border-white/10 text-white px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"
+          id="store-locator-btn">
+          <i class="fa-solid fa-location-dot text-brand-red"></i>
+          <span>Cửa Hàng</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button type="button"
+          class="flex items-center gap-2.5 bg-gradient-to-r from-brand-red to-brand-redDark text-white px-3.5 py-2 rounded-full hover:brightness-110 shadow-[0_4px_15px_rgba(227,24,55,0.4)] transition"
+          id="cart-toggle-btn">
+          <div class="relative flex items-center justify-center">
+            <i class="fa-solid fa-bag-shopping text-base"></i>
+            <span
+              class="absolute -top-2 -right-2 bg-brand-gold text-black font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+              id="cart-count">0</span>
+          </div>
+          <span class="hidden xl:inline font-bold text-xs" id="cart-total-nav">0₫</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION (OPTIMIZED FOR MOBILE & DESKTOP) ================= -->
+  <section class="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden" id="hero">
+    <!-- Ambient glow backgrounds -->
+    <div
+      class="absolute top-0 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-brand-red/20 rounded-full blur-[120px] pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-0 right-10 w-72 md:w-96 h-72 md:h-96 bg-brand-gold/15 rounded-full blur-[120px] pointer-events-none">
+    </div>
+
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+
+      <!-- Left Content Column -->
+      <div class="lg:col-span-7 text-center lg:text-left">
+        <div
+          class="inline-flex items-center gap-2 bg-white/[0.07] border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-semibold text-brand-gold mb-4 sm:mb-6 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+          <span>🔥 Siêu Phẩm Gà Giòn Số 1 Thế Giới</span>
+        </div>
+
+        <h1
+          class="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-white tracking-tight uppercase leading-[1.1] mb-4 sm:mb-6">
+          GIÒN RỤM <span class="text-brand-gold">VUI VẺ</span>,<br>
+          VỊ NGON <span class="text-brand-redLight">LAN TỎA</span>!
+        </h1>
+
+        <p
+          class="text-sm sm:text-base md:text-lg text-[#C9C7D4] mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          Thưởng thức từng miếng gà giòn đậm vị, sốt ướp bí truyền Philippines, lớp da giòn rụm bên ngoài cùng từng thớ
+          thịt mọng nước ngọt ngào bên trong.
+        </p>
+
+        <!-- Value Badges -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 sm:mb-8 text-xs sm:text-sm font-semibold text-white">
+          <div
+            class="flex items-center justify-center lg:justify-start gap-2 bg-white/[0.03] p-2.5 rounded-xl border border-white/5">
+            <i class="fa-solid fa-certificate text-brand-gold"></i>
+            <span>100% Gà Tươi Chuẩn</span>
+          </div>
+          <div
+            class="flex items-center justify-center lg:justify-start gap-2 bg-white/[0.03] p-2.5 rounded-xl border border-white/5">
+            <i class="fa-solid fa-fire text-brand-red"></i>
+            <span>Chiên Mới Nóng Hổi</span>
+          </div>
+          <div
+            class="flex items-center justify-center lg:justify-start gap-2 bg-white/[0.03] p-2.5 rounded-xl border border-white/5">
+            <i class="fa-solid fa-truck-fast text-brand-gold"></i>
+            <span>Giao Nhanh 20 Phút</span>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8">
+          <a href="#menu-section"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-red to-brand-redDark hover:from-brand-redLight hover:to-brand-red text-white font-bold px-7 py-3.5 rounded-full shadow-[0_8px_25px_rgba(227,24,55,0.5)] transition-transform duration-200 active:scale-95"
+            id="hero-order-btn">
+            <i class="fa-solid fa-utensils"></i> Đặt Món Ngay
+          </a>
+          <a href="#combo-builder"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/[0.08] hover:bg-white/[0.16] border border-brand-gold/30 text-brand-gold hover:text-white font-bold px-6 py-3.5 rounded-full transition">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Tự Phối Combo 15%
+          </a>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="flex items-center justify-around lg:justify-start gap-4 sm:gap-8 pt-6 border-t border-white/10">
+          <div>
+            <div class="font-heading font-extrabold text-xl sm:text-2xl text-brand-gold">100+</div>
+            <div class="text-[11px] sm:text-xs text-[#8E8B9D]">Cửa hàng toàn cầu</div>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div>
+            <div class="font-heading font-extrabold text-xl sm:text-2xl text-brand-gold">4.9 ★</div>
+            <div class="text-[11px] sm:text-xs text-[#8E8B9D]">20K+ Đánh giá tốt</div>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div>
+            <div class="font-heading font-extrabold text-xl sm:text-2xl text-brand-gold">100%</div>
+            <div class="text-[11px] sm:text-xs text-[#8E8B9D]">Nụ cười hài lòng</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Hero Dish -->
+      <div class="lg:col-span-5 flex justify-center relative">
+        <div class="relative w-full max-w-md">
+          <!-- Plate Glow -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-gold/30 to-brand-red/30 rounded-3xl blur-2xl -z-10">
+          </div>
+
+          <img src="assets/chicken.jpg" alt="Xô Gà Giòn Vui Vẻ Chicken"
+            class="w-full h-auto rounded-3xl border border-white/15 shadow-2xl object-cover animate-float"
+            id="hero-chicken-img">
+
+          <!-- Floating Badges (Desktop & Tablet) -->
+          <div
+            class="hidden sm:flex absolute -top-4 -right-4 bg-[#17141E]/90 backdrop-blur-md border border-white/15 p-3 rounded-2xl shadow-xl items-center gap-3 animate-bobbing">
+            <div
+              class="w-9 h-9 rounded-full bg-brand-gold text-black flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-crown"></i>
+            </div>
+            <div class="text-left">
+              <div class="font-bold text-xs text-white">Best-Seller</div>
+              <div class="text-[10px] text-[#8E8B9D]">Gà Giòn Vui Vẻ</div>
+            </div>
+          </div>
+
+          <div
+            class="hidden sm:flex absolute -bottom-4 -left-4 bg-[#17141E]/90 backdrop-blur-md border border-white/15 p-3 rounded-2xl shadow-xl items-center gap-3 animate-bobbing-delay">
+            <div
+              class="w-9 h-9 rounded-full bg-brand-red text-white flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-pepper-hot"></i>
+            </div>
+            <div class="text-left">
+              <div class="font-bold text-xs text-white">Cay Giòn Đậm Vị</div>
+              <div class="text-[10px] text-[#8E8B9D]">Sốt Ớt Philippines</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MEGA PROMO BANNER ================= -->
+  <section class="py-6 sm:py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div
+        class="bg-gradient-to-r from-[#2A1017] via-[#1E121E] to-[#15111B] border border-brand-red/30 rounded-3xl p-6 sm:p-10 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative overflow-hidden">
+        <div class="lg:col-span-7">
+          <span
+            class="inline-flex items-center gap-1.5 bg-brand-gold/15 text-brand-gold border border-brand-gold/30 px-3 py-1 rounded-full text-xs font-bold mb-3">
+            <i class="fa-solid fa-star"></i> ĐẠI TIỆC GIA ĐÌNH & NHÓM BẠN
+          </span>
+          <h2 class="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-white mb-2">COMBO JOLLI PARTY - NO
+            SAY THỎA THÍCH</h2>
+          <p class="text-sm sm:text-base text-[#C9C7D4] mb-4">Trọn bộ 6 miếng Gà Giòn + 2 Mì Ý Sốt Bò Bằm + 4 Bánh Pie
+            Xoài Đào + 4 Nước Ngọt mát lạnh!</p>
+
+          <div class="flex items-baseline gap-3 mb-6">
+            <span class="text-base text-[#8E8B9D] line-through">349.000₫</span>
+            <span class="font-heading font-black text-3xl sm:text-4xl text-brand-gold">249.000₫</span>
+            <span class="bg-brand-red text-white text-xs font-bold px-2.5 py-1 rounded-full">Tiết kiệm 100k</span>
+          </div>
+
+          <button type="button"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-extrabold px-6 py-3.5 rounded-full hover:brightness-110 shadow-lg transition"
+            onclick="quickAddComboParty()">
+            <i class="fa-solid fa-cart-plus"></i> Thêm Combo Vào Giỏ Ngay
+          </button>
+        </div>
+
+        <div class="lg:col-span-5">
+          <img src="assets/feast.jpg" alt="Đại tiệc Chicken Party Combo"
+            class="rounded-2xl border border-white/10 shadow-xl object-cover w-full max-h-64 sm:max-h-72">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE MENU SECTION (RESPONSIVE GRID) ================= -->
+  <section class="py-12 sm:py-16" id="menu-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+        <span class="text-brand-gold text-xs font-extrabold tracking-widest uppercase block mb-1">THỰC ĐƠN ĐẬM ĐÀ</span>
+        <h2 class="font-heading font-black text-2xl sm:text-4xl text-white mb-3">Khám Phá Món Ngon <span
+            class="text-brand-redLight">Chicken</span></h2>
+        <p class="text-xs sm:text-sm text-[#8E8B9D]">Hơn 22+ món ngon đặc sắc chiên mới giòn rụm mỗi ngày luôn sẵn sàng
+          phục vụ bạn!</p>
+      </div>
+
+      <!-- Filter Tabs & Search Bar -->
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8">
+        <!-- Horizontal Scrollable Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none category-tabs-scroll"
+          role="tablist">
+          <button type="button"
+            class="tab-btn active shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-red text-white transition flex items-center gap-1.5 shadow"
+            data-category="all">
+            <i class="fa-solid fa-border-all"></i> Tất Cả
+          </button>
+          <button type="button"
+            class="tab-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#17141E] text-[#C9C7D4] hover:text-white border border-white/10 transition flex items-center gap-1.5"
+            data-category="chicken">
+            <i class="fa-solid fa-drumstick-bite"></i> Gà Giòn
+          </button>
+          <button type="button"
+            class="tab-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#17141E] text-[#C9C7D4] hover:text-white border border-white/10 transition flex items-center gap-1.5"
+            data-category="spaghetti">
+            <i class="fa-solid fa-bowl-food"></i> Mì Ý
+          </button>
+          <button type="button"
+            class="tab-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#17141E] text-[#C9C7D4] hover:text-white border border-white/10 transition flex items-center gap-1.5"
+            data-category="burger-rice">
+            <i class="fa-solid fa-burger"></i> Burger & Cơm
+          </button>
+          <button type="button"
+            class="tab-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#17141E] text-[#C9C7D4] hover:text-white border border-white/10 transition flex items-center gap-1.5"
+            data-category="sides">
+            <i class="fa-solid fa-cookie-bite"></i> Ăn Vặt
+          </button>
+          <button type="button"
+            class="tab-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#17141E] text-[#C9C7D4] hover:text-white border border-white/10 transition flex items-center gap-1.5"
+            data-category="dessert">
+            <i class="fa-solid fa-ice-cream"></i> Tráng Miệng & Nước
+          </button>
+          <button type="button"
+            class="tab-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#17141E] text-[#C9C7D4] hover:text-white border border-white/10 transition flex items-center gap-1.5"
+            data-category="combo">
+            <i class="fa-solid fa-box-open"></i> Combo
+          </button>
+        </div>
+
+        <!-- Live Search Input -->
+        <div class="relative w-full md:w-72 shrink-0">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#8E8B9D] text-xs"></i>
+          <input type="text" id="menu-search-input" placeholder="Tìm kiếm món ăn..."
+            class="w-full bg-[#17141E] border border-white/10 rounded-full pl-10 pr-4 py-2 text-xs sm:text-sm text-white placeholder-[#8E8B9D] focus:border-brand-gold focus:outline-none transition">
+        </div>
+      </div>
+
+      <!-- Food Menu Grid: 1 col (mobile), 2 cols (tablet), 3-4 cols (desktop) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" id="menu-grid">
+        <!-- Rendered via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMBO BUILDER SECTION ================= -->
+  <section class="py-12 sm:py-16 bg-gradient-to-b from-[#14111A] to-[#0E0C12]" id="combo-builder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="bg-[#17141E] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="text-brand-gold text-xs font-extrabold tracking-widest uppercase block mb-1">SÁNG TẠO BỮA
+            ĂN</span>
+          <h2 class="font-heading font-black text-2xl sm:text-3xl text-white mb-2">Trình Tự Phối <span
+              class="text-brand-gold">Combo Cá Nhân</span></h2>
+          <p class="text-xs sm:text-sm text-[#8E8B9D]">Chọn đủ 3 món: Món chính + Món kèm + Nước/Tráng miệng để nhận
+            ngay ưu đãi giảm <strong class="text-brand-gold">15%</strong>!</p>
+        </div>
+
+        <!-- 3-Step Selection Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
+
+          <!-- Step 1: Main -->
+          <div class="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <div
+              class="flex items-center gap-2 pb-3 mb-3 border-b border-white/10 font-heading font-bold text-sm text-white">
+              <span class="bg-brand-red text-white text-[11px] px-2 py-0.5 rounded-full">Bước 1</span>
+              <span>Chọn Món Chính</span>
+            </div>
+            <div class="space-y-2.5" id="builder-main-options">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Step 2: Side -->
+          <div class="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <div
+              class="flex items-center gap-2 pb-3 mb-3 border-b border-white/10 font-heading font-bold text-sm text-white">
+              <span class="bg-brand-red text-white text-[11px] px-2 py-0.5 rounded-full">Bước 2</span>
+              <span>Chọn Món Kèm</span>
+            </div>
+            <div class="space-y-2.5" id="builder-side-options">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Step 3: Drink -->
+          <div class="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <div
+              class="flex items-center gap-2 pb-3 mb-3 border-b border-white/10 font-heading font-bold text-sm text-white">
+              <span class="bg-brand-red text-white text-[11px] px-2 py-0.5 rounded-full">Bước 3</span>
+              <span>Chọn Thức Uống</span>
+            </div>
+            <div class="space-y-2.5" id="builder-drink-options">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Combo Live Price Summary Bar -->
+        <div
+          class="bg-gradient-to-r from-[#20131B] to-[#1B1522] border border-brand-gold/30 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <div>
+            <h4 class="font-heading font-bold text-base text-white mb-1" id="summary-name">Chưa hoàn thiện</h4>
+            <p class="text-xs text-[#8E8B9D]" id="summary-items-list">Vui lòng chọn đủ 3 món để nhận chiết khấu 15%</p>
+          </div>
+          <div class="flex items-center justify-between sm:justify-end gap-4">
+            <div class="text-right">
+              <div class="text-xs text-[#8E8B9D] line-through" id="summary-original-price">0₫</div>
+              <div class="font-heading font-black text-2xl text-brand-gold" id="summary-final-price">0₫</div>
+            </div>
+            <button type="button"
+              class="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-redLight text-white font-bold px-5 py-3 rounded-full text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed transition"
+              id="btn-add-custom-combo" disabled onclick="addCustomComboToCart()">
+              <i class="fa-solid fa-plus"></i> Thêm Combo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================= BRAND STORY & PILLARS ================= -->
+  <section class="py-12 sm:py-16 bg-[#17141E]/50" id="story-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-brand-gold text-xs font-extrabold tracking-widest uppercase block mb-1">TÂM HUYẾT TỪ TRÁI
+          TIM</span>
+        <h2 class="font-heading font-black text-2xl sm:text-3xl text-white mb-2">Bí Quyết Vị Ngon <span
+            class="text-brand-gold">Huyền Thoại</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-[#17141E] border border-white/10 rounded-2xl p-6 text-center hover:-translate-y-1.5 transition">
+          <div
+            class="w-14 h-14 rounded-full bg-brand-gold/15 text-brand-gold flex items-center justify-center text-xl mx-auto mb-4 border border-brand-gold/30">
+            <i class="fa-solid fa-wheat-awn"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-white mb-2">Lớp Vỏ Giòn Độc Quyền</h3>
+          <p class="text-xs sm:text-sm text-[#8E8B9D]">Công thức bột gia vị đặc biệt chiên ở nhiệt độ chuẩn xác, tạo nên
+            lớp vỏ giòn rụm không ngấy dầu.</p>
+        </div>
+
+        <div class="bg-[#17141E] border border-white/10 rounded-2xl p-6 text-center hover:-translate-y-1.5 transition">
+          <div
+            class="w-14 h-14 rounded-full bg-brand-red/15 text-brand-redLight flex items-center justify-center text-xl mx-auto mb-4 border border-brand-red/30">
+            <i class="fa-solid fa-drumstick-bite"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-white mb-2">Thịt Gà Mọng Nước</h3>
+          <p class="text-xs sm:text-sm text-[#8E8B9D]">Từng miếng thịt gà tươi thấm đẫm sốt ướp bí truyền, ngọt mềm mọng
+            nước trong từng thớ thịt.</p>
+        </div>
+
+        <div class="bg-[#17141E] border border-white/10 rounded-2xl p-6 text-center hover:-translate-y-1.5 transition">
+          <div
+            class="w-14 h-14 rounded-full bg-brand-gold/15 text-brand-gold flex items-center justify-center text-xl mx-auto mb-4 border border-brand-gold/30">
+            <i class="fa-solid fa-face-smile-beam"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-white mb-2">Phục Vụ Tận Tâm</h3>
+          <p class="text-xs sm:text-sm text-[#8E8B9D]">Mỗi nụ cười và sự nhiệt thành luôn là món gia vị tuyệt vời nhất
+            gửi gắm đến quý khách hàng.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#09080C] border-t border-white/10 pt-12 pb-24 md:pb-12 text-xs sm:text-sm text-[#8E8B9D]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="assets/mascot.jpg" alt="Logo" class="w-9 h-9 rounded-full border border-brand-gold object-cover">
+          <span class="font-heading font-black text-xl text-brand-redLight">Chicken Vietnam</span>
+        </div>
+        <p class="max-w-sm mb-4">Chuỗi nhà hàng thức ăn nhanh được yêu thích hàng đầu với hơn 1,500 cửa hàng trên toàn
+          thế giới.</p>
+        <div class="flex items-center gap-3">
+          <a href="#"
+            class="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-brand-red text-white flex items-center justify-center transition"><i
+              class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"
+            class="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-brand-red text-white flex items-center justify-center transition"><i
+              class="fa-brands fa-tiktok"></i></a>
+          <a href="#"
+            class="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-brand-red text-white flex items-center justify-center transition"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-heading font-bold text-white text-sm mb-3">Liên Kết Nhanh</h4>
+        <ul class="space-y-2">
+          <li><a href="#menu-section" class="hover:text-brand-gold transition">Thực Đơn Món Ngon</a></li>
+          <li><a href="#combo-builder" class="hover:text-brand-gold transition">Tự Phối Combo 15%</a></li>
+          <li><button type="button" onclick="openStoreModal()" class="hover:text-brand-gold transition">Tra Cứu Cửa
+              Hàng</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-heading font-bold text-white text-sm mb-3">Hỗ Trợ Khách Hàng</h4>
+        <ul class="space-y-2">
+          <li>Hotline: <strong class="text-brand-gold">1900 1533</strong></li>
+          <li>Email: <span class="text-white">cskh@chicken.vn</span></li>
+          <li>Thời gian: 08:00 - 22:00 hàng ngày</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-white/5 text-center text-[11px]">
+      © 2026 Chicken Vietnam. Tất cả quyền được bảo lưu. Thiết kế phong cách Aesthetic Hiện Đại.
+    </div>
+  </footer>
+
+  <!-- ================= DEDICATED MOBILE BOTTOM NAVIGATION BAR ================= -->
+  <nav
+    class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#14111A]/95 backdrop-blur-lg border-t border-white/10 px-2 py-2 flex items-center justify-around text-center shadow-2xl"
+    aria-label="Menu di động">
+    <a href="#hero"
+      class="mobile-nav-item active flex flex-col items-center gap-1 text-[10px] font-semibold text-brand-gold transition"
+      data-section="hero">
+      <i class="fa-solid fa-house text-base"></i>
+      <span>Trang Chủ</span>
+    </a>
+    <a href="#menu-section"
+      class="mobile-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-[#C9C7D4] transition"
+      data-section="menu-section">
+      <i class="fa-solid fa-drumstick-bite text-base"></i>
+      <span>Thực Đơn</span>
+    </a>
+    <a href="#combo-builder"
+      class="mobile-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-[#C9C7D4] transition"
+      data-section="combo-builder">
+      <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+      <span>Phối Combo</span>
+    </a>
+    <button type="button"
+      class="mobile-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-brand-gold transition"
+      onclick="toggleCompanionModal()">
+      <i class="fa-solid fa-robot text-base text-brand-gold"></i>
+      <span>ChickenBot AI</span>
+    </button>
+    <button type="button"
+      class="mobile-nav-item relative flex flex-col items-center gap-1 text-[10px] font-semibold text-brand-redLight transition"
+      onclick="toggleCartDrawer(true)">
+      <div class="relative">
+        <i class="fa-solid fa-bag-shopping text-base"></i>
+        <span
+          class="absolute -top-1 -right-2 bg-brand-gold text-black text-[9px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center"
+          id="cart-count-mobile">0</span>
+      </div>
+      <span>Giỏ Hàng</span>
+    </button>
+  </nav>
+
+  <!-- ================= MASCOT COMPANION WIDGET (JOLLIBOT) ================= -->
+  <div class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 flex flex-col items-end gap-2" id="companion-widget">
+    <!-- Bubble Hint -->
+    <div
+      class="bg-[#17141E]/95 backdrop-blur-md border border-brand-gold/40 rounded-2xl rounded-br-sm p-3 max-w-[240px] text-xs text-white shadow-2xl relative animate-pop hidden"
+      id="companion-bubble">
+      <span id="bubble-text">Chào bạn! Đang đói bụng hả? Bấm vào mình để nhận gợi ý món ngon nhé! 🍗🐝</span>
+      <button type="button" class="absolute top-1 right-2 text-[#8E8B9D] hover:text-white"
+        onclick="closeCompanionBubble(event)">×</button>
+    </div>
+
+    <!-- Floating Avatar Trigger -->
+    <button type="button"
+      class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-brand-gold shadow-[0_0_20px_rgba(255,192,0,0.4)] bg-white overflow-hidden animate-mascot-float cursor-pointer"
+      onclick="toggleCompanionModal()" title="Trò chuyện với JolliBot">
+      <img src="assets/mascot.jpg" alt="JolliBot" class="w-full h-full object-cover">
+      <span class="absolute bottom-1 right-1 w-3 h-3 bg-green-500 border-2 border-black rounded-full"></span>
+    </button>
+  </div>
+
+  <!-- Mascot Chat Modal Window -->
+  <div
+    class="fixed bottom-28 md:bottom-24 right-4 sm:right-6 w-[340px] max-w-[calc(100vw-32px)] h-[460px] bg-[#14111A]/95 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-2xl z-50 flex-col overflow-hidden hidden"
+    id="companion-modal">
+    <!-- Chat Header -->
+    <div class="bg-gradient-to-r from-brand-redDark to-brand-red p-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/mascot.jpg" alt="JolliBot" class="w-8 h-8 rounded-full border border-white object-cover">
+        <div>
+          <h4 class="font-heading font-bold text-xs text-white">BeeBot - Ong Vui Vẻ 🐝</h4>
+          <span class="text-[10px] text-white/80 flex items-center gap-1"><span
+              class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Trợ lý ẩm thực AI</span>
+        </div>
+      </div>
+      <button type="button" class="text-white/80 hover:text-white text-base" onclick="toggleCompanionModal()"><i
+          class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Message History -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-3 text-xs" id="chat-messages">
+      <div class="flex justify-start">
+        <div
+          class="bg-white/10 border border-white/10 text-white rounded-2xl rounded-bl-xs p-3 max-w-[85%] leading-relaxed">
+          Xin chào! Mình là <strong>BeeBot</strong> - Chú Ong Vui Vẻ đại sứ Chicken 🐝✨ Được tích hợp trí tuệ nhân tạo
+          DeepSeek, mình sẵn sàng tư vấn món ngon, hướng dẫn phối combo và đồng hành cùng bạn hôm nay! 🍗💛
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing Indicator (Ẩn/Hiện khi AI suy nghĩ) -->
+    <div class="px-4 py-1.5 bg-black/30 border-t border-white/5 text-[11px] text-brand-gold items-center gap-2 hidden"
+      id="chat-typing-indicator">
+      <span class="inline-flex gap-1 items-center">
+        <span class="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce"></span>
+        <span class="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce [animation-delay:0.2s]"></span>
+        <span class="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce [animation-delay:0.4s]"></span>
+      </span>
+      <span class="italic">BeeBot đang suy nghĩ... 🐝🤐</span>
+    </div>
+
+    <!-- Quick Chips -->
+    <div class="p-2 bg-black/30 border-t border-white/5 flex gap-1.5 overflow-x-auto scrollbar-none">
+      <button type="button"
+        class="shrink-0 bg-white/10 hover:bg-brand-gold hover:text-black text-[#C9C7D4] text-[11px] font-medium px-2.5 py-1 rounded-full transition"
+        onclick="sendQuickPrompt('Gợi ý món ăn ngon cho 1 người ăn no nê')">🍗 Ăn 1 mình</button>
+      <button type="button"
+        class="shrink-0 bg-white/10 hover:bg-brand-gold hover:text-black text-[#C9C7D4] text-[11px] font-medium px-2.5 py-1 rounded-full transition"
+        onclick="sendQuickPrompt('Gợi ý combo gà giòn và mì ý cho nhóm 3-4 bạn')">🎉 Ăn nhóm</button>
+      <button type="button"
+        class="shrink-0 bg-white/10 hover:bg-brand-gold hover:text-black text-[#C9C7D4] text-[11px] font-medium px-2.5 py-1 rounded-full transition"
+        onclick="sendQuickPrompt('Gợi ý các món tráng miệng và nước ngọt mát lạnh')">🍨 Tráng miệng & Nước</button>
+      <button type="button"
+        class="shrink-0 bg-white/10 hover:bg-brand-gold hover:text-black text-[#C9C7D4] text-[11px] font-medium px-2.5 py-1 rounded-full transition"
+        onclick="sendQuickPrompt('Các món cay giòn đậm vị tại Chicken có gì hot?')">🌶️ Món cay</button>
+      <button type="button"
+        class="shrink-0 bg-white/10 hover:bg-brand-gold hover:text-black text-[#C9C7D4] text-[11px] font-medium px-2.5 py-1 rounded-full transition"
+        onclick="sendQuickPrompt('Hướng dẫn cách tự phối combo tiết kiệm 15%')">✨ Tự phối combo</button>
+    </div>
+
+    <!-- Chat Input Form -->
+    <form class="p-2.5 bg-[#0E0C12] border-t border-white/10 flex gap-2" onsubmit="handleChatSubmit(event)">
+      <input type="text" id="chat-user-input" placeholder="Hỏi JolliBot bất cứ điều gì..."
+        class="flex-1 bg-white/5 border border-white/10 rounded-full px-3.5 py-1.5 text-xs text-white focus:border-brand-gold focus:outline-none">
+      <button type="submit"
+        class="w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-xs hover:bg-brand-redLight transition"><i
+          class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <!-- ================= SLIDE-OVER CART DRAWER ================= -->
+  <div
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none"
+    id="cart-overlay" onclick="toggleCartDrawer(false)"></div>
+
+  <aside
+    class="fixed top-0 right-0 w-full max-w-md h-full bg-[#14111A] border-l border-white/10 z-50 flex flex-col shadow-2xl transition-transform duration-300 translate-x-full"
+    id="cart-drawer">
+    <!-- Header -->
+    <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-white font-heading font-bold text-base sm:text-lg">
+        <i class="fa-solid fa-bag-shopping text-brand-red"></i>
+        <h3>Giỏ Hàng Của Bạn (<span id="cart-drawer-count">0</span>)</h3>
+      </div>
+      <button type="button"
+        class="w-8 h-8 rounded-full bg-white/5 text-[#8E8B9D] hover:text-white flex items-center justify-center"
+        onclick="toggleCartDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Cart Items Body -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items-list">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- Footer Summary & Checkout -->
+    <div class="p-4 sm:p-5 border-t border-white/10 bg-[#0E0C12]/95 space-y-4" id="cart-footer" style="display: none;">
+      <!-- Bill Breakdown -->
+      <div class="space-y-2 text-xs text-[#8E8B9D]">
+        <div class="flex justify-between">
+          <span>Tạm tính:</span>
+          <span class="text-white font-medium" id="bill-subtotal">0₫</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Phí giao hàng:</span>
+          <span class="text-white font-medium" id="bill-shipping">15.000₫</span>
+        </div>
+        <div
+          class="flex justify-between items-baseline font-heading font-black text-sm text-white pt-2.5 border-t border-white/10">
+          <span>Tổng cộng:</span>
+          <span class="text-xl text-brand-gold" id="bill-total">0₫</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <button type="button"
+        class="w-full bg-gradient-to-r from-brand-red to-brand-redDark hover:from-brand-redLight hover:to-brand-red text-white font-bold py-3 rounded-full text-sm shadow-lg transition"
+        onclick="openCheckoutModal()">
+        <i class="fa-solid fa-shield-check mr-1.5"></i> Đặt Hàng Thử Nghiệm
+      </button>
+    </div>
+  </aside>
+
+  <!-- ================= ITEM CUSTOMIZER MODAL ================= -->
+  <div
+    class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none"
+    id="item-modal-overlay">
+    <div
+      class="bg-[#191522] border border-white/15 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-zoom">
+      <button type="button"
+        class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-[#8E8B9D] hover:text-white flex items-center justify-center z-10"
+        onclick="closeItemModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2">
+        <div class="bg-[#110e17] h-48 sm:h-auto flex items-center justify-center">
+          <img src="assets/chicken.jpg" alt="Food Item" class="w-full h-full object-cover" id="modal-item-img">
+        </div>
+        <div class="p-5 sm:p-6 flex flex-col">
+          <span class="text-[11px] font-extrabold text-brand-gold uppercase tracking-wider" id="modal-item-cat">Gà Giòn
+            Vui Vẻ</span>
+          <h3 class="font-heading font-bold text-lg text-white mt-1 mb-1" id="modal-item-name">Tên Món</h3>
+          <p class="text-xs text-[#8E8B9D] mb-3 leading-relaxed" id="modal-item-desc">Mô tả món ăn...</p>
+          <div class="font-heading font-extrabold text-xl text-brand-gold mb-4" id="modal-item-price">45.000₫</div>
+
+          <!-- Options -->
+          <div class="space-y-3 text-xs mb-4">
+            <div>
+              <label class="font-bold text-white block mb-1.5">Chọn Vị:</label>
+              <div class="space-y-1.5">
+                <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer">
+                  <input type="radio" name="spice" value="original" checked class="accent-brand-red">
+                  <span>🍗 Nguyên Vị Giòn Ngọt</span>
+                </label>
+                <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer">
+                  <input type="radio" name="spice" value="spicy" class="accent-brand-red">
+                  <span>🌶️ Cay Giòn Đậm Đà</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="font-bold text-white block mb-1.5">Thêm Topping:</label>
+              <div class="space-y-1.5">
+                <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer">
+                  <input type="checkbox" id="add-cheese" value="10000" class="accent-brand-red">
+                  <span>🧀 Sốt Phô Mai (+10k)</span>
+                </label>
+                <label class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5 cursor-pointer">
+                  <input type="checkbox" id="add-upsize" value="8000" class="accent-brand-red">
+                  <span>🥤 Upsize Nước Lớn (+8k)</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="font-bold text-white block mb-1">Ghi chú cho bếp:</label>
+              <input type="text" id="modal-item-note" placeholder="Ví dụ: Lấy đùi gà, ít đá..."
+                class="w-full bg-white/5 border border-white/10 rounded-xl p-2 text-xs text-white focus:border-brand-gold focus:outline-none">
+            </div>
+          </div>
+
+          <!-- Quantity & Add -->
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10 mt-auto">
+            <div class="flex items-center bg-white/5 border border-white/10 rounded-full p-1">
+              <button type="button"
+                class="w-7 h-7 rounded-full text-white hover:bg-brand-red flex items-center justify-center font-bold"
+                onclick="changeModalQty(-1)">-</button>
+              <span class="w-7 text-center font-bold text-white text-xs" id="modal-item-qty">1</span>
+              <button type="button"
+                class="w-7 h-7 rounded-full text-white hover:bg-brand-red flex items-center justify-center font-bold"
+                onclick="changeModalQty(1)">+</button>
+            </div>
+            <button type="button"
+              class="flex-1 bg-brand-red hover:bg-brand-redLight text-white font-bold py-2.5 px-4 rounded-full text-xs transition"
+              onclick="confirmAddItemFromModal()">
+              Thêm Vào Giỏ (<span id="modal-calculated-total">45.000₫</span>)
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ================= STORE LOCATOR MODAL ================= -->
+  <div
+    class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none"
+    id="store-modal-overlay">
+    <div class="bg-[#181422] border border-white/15 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative animate-zoom">
+      <button type="button"
+        class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 text-[#8E8B9D] hover:text-white flex items-center justify-center"
+        onclick="closeStoreModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <h3 class="font-heading font-bold text-lg text-white mb-3 flex items-center gap-2">
+        <i class="fa-solid fa-location-dot text-brand-red"></i> Hệ Thống Cửa Hàng Chicken
+      </h3>
+
+      <input type="text" placeholder="Tìm theo Quận / Tỉnh thành..."
+        class="w-full bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs sm:text-sm text-white focus:border-brand-gold focus:outline-none mb-4"
+        oninput="filterStores(this.value)">
+
+      <div class="max-h-64 overflow-y-auto space-y-2.5 text-xs" id="store-list">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHECKOUT SUCCESS MODAL ================= -->
+  <div
+    class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none"
+    id="checkout-modal-overlay">
+    <div
+      class="bg-[#181422] border border-green-500/40 rounded-3xl max-w-md w-full p-6 sm:p-8 text-center shadow-2xl relative animate-zoom">
+      <div
+        class="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-3xl mx-auto mb-4">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h2 class="font-heading font-black text-2xl text-white mb-1">ĐẶT HÀNG THÀNH CÔNG! 🎉</h2>
+      <p class="text-xs text-[#8E8B9D] mb-5">Cảm ơn bạn đã lựa chọn Chicken! Chú Ong Vui Vẻ đang chuẩn bị món ăn để giao
+        ngay cho bạn.</p>
+
+      <div class="bg-black/40 border border-dashed border-white/15 rounded-xl p-4 text-xs text-left mb-6 space-y-2"
+        id="receipt-details">
+        <!-- Details injected via JS -->
+      </div>
+
+      <button type="button"
+        class="w-full bg-brand-red hover:bg-brand-redLight text-white font-bold py-3 rounded-full text-xs sm:text-sm transition"
+        onclick="closeCheckoutModal()">Tiếp Tục Khám Phá</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+
+</html>
