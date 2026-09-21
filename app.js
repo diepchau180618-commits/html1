@@ -553,37 +553,37 @@ function renderMenu(filterCat = 'all', searchQuery = '') {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="col-span-full text-center py-12 px-4">
-        <i class="fa-solid fa-magnifying-glass text-4xl text-[#8E8B9D] mb-3"></i>
-        <h3 class="text-white font-bold text-base mb-1">Không tìm thấy món ăn phù hợp!</h3>
-        <p class="text-xs text-[#8E8B9D]">Hãy thử tìm từ khóa khác hoặc chọn danh mục khác nhé.</p>
+        <i class="fa-solid fa-magnifying-glass text-4xl text-gray-400 mb-3"></i>
+        <h3 class="text-gray-800 font-bold text-base mb-1">Không tìm thấy món ăn phù hợp!</h3>
+        <p class="text-xs text-gray-500">Hãy thử tìm từ khóa khác hoặc chọn danh mục khác nhé.</p>
       </div>
     `;
     return;
   }
 
-  // Render các Card món ăn
+  // Render các Card món ăn phong cách ẩm thực thực tế
   grid.innerHTML = filtered.map(item => `
-    <div class="food-card flex flex-col overflow-hidden group">
+    <div class="food-card flex flex-col overflow-hidden bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
       <!-- Ảnh món ăn & Huy hiệu -->
-      <div class="food-card-img-wrap relative w-full overflow-hidden bg-[#110e17]">
-        <img src="${item.image}" alt="${item.name}" class="food-img w-full h-full object-cover transition-transform duration-500" loading="lazy">
-        ${item.badge ? `<span class="absolute top-2.5 left-2.5 bg-[#0E0C12]/85 backdrop-blur-sm border border-white/10 text-brand-gold text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow flex items-center gap-1"><i class="fa-solid fa-sparkles"></i> ${item.badge}</span>` : ''}
-        ${item.spicy ? `<span class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">${item.spicy}</span>` : ''}
+      <div class="food-card-img-wrap relative w-full overflow-hidden bg-gray-100">
+        <img src="${item.image}" alt="${item.name}" class="food-img w-full h-full object-cover transition-transform duration-300" loading="lazy">
+        ${item.badge ? `<span class="absolute top-2.5 left-2.5 bg-brand-gold text-black text-[10px] font-extrabold px-2.5 py-0.5 rounded shadow-sm flex items-center gap-1"><i class="fa-solid fa-sparkles"></i> ${item.badge}</span>` : ''}
+        ${item.spicy ? `<span class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">${item.spicy}</span>` : ''}
       </div>
 
       <!-- Thông tin chi tiết món ăn -->
       <div class="p-4 flex flex-col flex-1">
-        <h3 class="font-heading font-bold text-sm sm:text-base text-white mb-1 group-hover:text-brand-gold transition">${item.name}</h3>
-        <p class="text-xs text-[#8E8B9D] leading-relaxed mb-3 line-clamp-2 flex-1">${item.desc}</p>
+        <h3 class="font-heading font-bold text-sm sm:text-base text-gray-900 mb-1 hover:text-brand-red transition">${item.name}</h3>
+        <p class="text-xs text-gray-500 leading-relaxed mb-3 line-clamp-2 flex-1">${item.desc}</p>
         
         <!-- Giá tiền & Nút Thao tác -->
-        <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-auto">
-          <div class="font-heading font-black text-base sm:text-lg text-brand-gold">${formatVND(item.price)}</div>
+        <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto">
+          <div class="font-heading font-black text-base sm:text-lg text-brand-red">${formatVND(item.price)}</div>
           <div class="flex items-center gap-1.5">
-            <button type="button" class="bg-white/5 hover:bg-white/15 border border-white/10 text-white text-xs font-semibold px-2.5 py-1.5 rounded-full flex items-center gap-1 transition" onclick="openItemModal('${item.id}')">
+            <button type="button" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition" onclick="openItemModal('${item.id}')">
               <i class="fa-solid fa-sliders text-[10px]"></i> Tùy chọn
             </button>
-            <button type="button" class="w-8 h-8 rounded-full bg-brand-red hover:bg-brand-redLight text-white flex items-center justify-center text-xs shadow-md transition-transform active:scale-95" title="Thêm ngay vào giỏ" onclick="quickAddToCart('${item.id}')">
+            <button type="button" class="w-8 h-8 rounded-lg bg-brand-red hover:bg-brand-redDark text-white flex items-center justify-center text-xs shadow-sm transition active:scale-95" title="Thêm ngay vào giỏ" onclick="quickAddToCart('${item.id}')">
               <i class="fa-solid fa-plus"></i>
             </button>
           </div>
@@ -599,10 +599,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     playSound('pop');
     document.querySelectorAll('.tab-btn').forEach(b => {
       b.classList.remove('active', 'bg-brand-red', 'text-white');
-      b.classList.add('bg-[#17141E]', 'text-[#C9C7D4]');
+      b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
     });
     btn.classList.add('active', 'bg-brand-red', 'text-white');
-    btn.classList.remove('bg-[#17141E]', 'text-[#C9C7D4]');
+    btn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
     
     const category = btn.getAttribute('data-category');
     const searchVal = document.getElementById('menu-search-input')?.value || '';
@@ -771,10 +771,10 @@ function updateCartUI() {
     if (itemsList) {
       itemsList.innerHTML = `
         <div class="text-center py-12 px-4 flex flex-col items-center">
-          <img src="assets/mascot.jpg" alt="Giỏ trống" class="w-20 h-20 rounded-full border-2 border-dashed border-brand-gold mb-3 object-cover">
-          <h4 class="font-heading font-bold text-white text-base mb-1">Giỏ hàng của bạn đang trống!</h4>
-          <p class="text-xs text-[#8E8B9D] mb-4">Hãy chọn những món Gà Giòn và Mì Ý thơm ngon để lấp đầy chiếc bụng đói nhé!</p>
-          <button type="button" class="bg-brand-red text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-brand-redLight transition" onclick="toggleCartDrawer(false); scrollToMenu();">Xem Thực Đơn Ngay</button>
+          <img src="assets/mascot.jpg" alt="Giỏ trống" class="w-20 h-20 rounded-full border-2 border-dashed border-gray-300 mb-3 object-cover">
+          <h4 class="font-heading font-bold text-gray-800 text-base mb-1">Giỏ hàng của bạn đang trống!</h4>
+          <p class="text-xs text-gray-500 mb-4">Hãy chọn những món Gà Giòn và Mì Ý thơm ngon để lấp đầy chiếc bụng đói nhé!</p>
+          <button type="button" class="bg-brand-red text-white text-xs font-bold px-5 py-2.5 rounded-lg hover:bg-brand-redDark transition shadow-sm" onclick="toggleCartDrawer(false); scrollToMenu();">Xem Thực Đơn Ngay</button>
         </div>
       `;
     }
@@ -788,17 +788,17 @@ function updateCartUI() {
   // Render danh sách các món trong giỏ hàng
   if (itemsList) {
     itemsList.innerHTML = state.cart.map((item, index) => `
-      <div class="flex items-center gap-3 bg-white/[0.03] border border-white/10 rounded-2xl p-3">
-        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover">
+      <div class="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-xl p-3">
+        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-lg object-cover border border-gray-200">
         <div class="flex-1 min-w-0">
-          <h4 class="font-heading font-bold text-xs sm:text-sm text-white truncate">${item.name}</h4>
-          ${item.options ? `<div class="text-[10px] text-brand-gold truncate">${item.options}</div>` : ''}
-          <div class="font-heading font-black text-xs text-brand-gold mt-0.5">${formatVND(item.price)}</div>
+          <h4 class="font-heading font-bold text-xs sm:text-sm text-gray-800 truncate">${item.name}</h4>
+          ${item.options ? `<div class="text-[10px] text-gray-500 truncate">${item.options}</div>` : ''}
+          <div class="font-heading font-black text-xs text-brand-red mt-0.5">${formatVND(item.price)}</div>
         </div>
-        <div class="flex items-center gap-1.5 bg-white/5 rounded-full p-1 border border-white/5">
-          <button type="button" class="w-5 h-5 rounded-full bg-white/10 text-white flex items-center justify-center text-[10px] hover:bg-brand-red" onclick="updateCartItemQty(${index}, -1)">-</button>
-          <span class="font-bold text-xs text-white min-w-4 text-center">${item.qty}</span>
-          <button type="button" class="w-5 h-5 rounded-full bg-white/10 text-white flex items-center justify-center text-[10px] hover:bg-brand-red" onclick="updateCartItemQty(${index}, 1)">+</button>
+        <div class="flex items-center gap-1.5 bg-white rounded-lg p-1 border border-gray-200 shadow-sm">
+          <button type="button" class="w-5 h-5 rounded bg-gray-100 text-gray-700 flex items-center justify-center text-[10px] hover:bg-brand-red hover:text-white" onclick="updateCartItemQty(${index}, -1)">-</button>
+          <span class="font-bold text-xs text-gray-800 min-w-4 text-center">${item.qty}</span>
+          <button type="button" class="w-5 h-5 rounded bg-gray-100 text-gray-700 flex items-center justify-center text-[10px] hover:bg-brand-red hover:text-white" onclick="updateCartItemQty(${index}, 1)">+</button>
         </div>
       </div>
     `).join('');
@@ -877,24 +877,24 @@ function openCheckoutModal() {
   const receipt = document.getElementById('receipt-details');
   receipt.innerHTML = `
     <div class="flex justify-between">
-      <span class="text-[#8E8B9D]">Mã đơn hàng:</span>
-      <strong class="text-brand-gold font-mono">${orderId}</strong>
+      <span class="text-gray-500">Mã đơn hàng:</span>
+      <strong class="text-brand-red font-mono">${orderId}</strong>
     </div>
     <div class="flex justify-between">
-      <span class="text-[#8E8B9D]">Thời gian đặt:</span>
-      <span class="text-white">${new Date().toLocaleTimeString('vi-VN')} - Hôm nay</span>
+      <span class="text-gray-500">Thời gian đặt:</span>
+      <span class="text-gray-800">${new Date().toLocaleTimeString('vi-VN')} - Hôm nay</span>
     </div>
     <div class="flex justify-between">
-      <span class="text-[#8E8B9D]">Số lượng món:</span>
-      <span class="text-white">${state.cart.length} món ăn nóng hổi</span>
+      <span class="text-gray-500">Số lượng món:</span>
+      <span class="text-gray-800">${state.cart.length} món ăn</span>
     </div>
     <div class="flex justify-between">
-      <span class="text-[#8E8B9D]">Thời gian giao dự kiến:</span>
-      <strong class="text-green-400">~20-25 phút</strong>
+      <span class="text-gray-500">Thời gian giao dự kiến:</span>
+      <strong class="text-green-600">~20-25 phút</strong>
     </div>
-    <div class="flex justify-between items-baseline pt-2 border-t border-white/10 font-bold">
-      <span class="text-white">Tổng thanh toán:</span>
-      <strong class="text-brand-gold font-heading text-base">${total}</strong>
+    <div class="flex justify-between items-baseline pt-2 border-t border-gray-200 font-bold">
+      <span class="text-gray-800">Tổng thanh toán:</span>
+      <strong class="text-brand-red font-heading text-base">${total}</strong>
     </div>
   `;
 
@@ -945,13 +945,13 @@ function renderComboBuilder() {
     if (!container) return;
 
     container.innerHTML = BUILDER_OPTIONS[type].map(opt => `
-      <div class="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border ${state.comboBuilder[type]?.id === opt.id ? 'border-brand-gold bg-brand-gold/10' : 'border-white/5 hover:bg-white/5'} cursor-pointer transition" onclick="selectComboOption('${type}', '${opt.id}')">
-        <img src="${opt.img}" alt="${opt.name}" class="w-10 h-10 rounded-lg object-cover">
+      <div class="flex items-center gap-3 p-2.5 rounded-xl bg-white border ${state.comboBuilder[type]?.id === opt.id ? 'border-brand-red bg-red-50/50 ring-1 ring-brand-red' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'} cursor-pointer transition shadow-sm" onclick="selectComboOption('${type}', '${opt.id}')">
+        <img src="${opt.img}" alt="${opt.name}" class="w-10 h-10 rounded-lg object-cover border border-gray-200">
         <div class="flex-1 min-w-0">
-          <div class="font-bold text-xs text-white truncate">${opt.name}</div>
-          <div class="text-[11px] text-brand-gold font-semibold">${formatVND(opt.price)}</div>
+          <div class="font-bold text-xs text-gray-800 truncate">${opt.name}</div>
+          <div class="text-[11px] text-brand-red font-semibold">${formatVND(opt.price)}</div>
         </div>
-        <i class="fa-solid fa-circle-check text-xs ${state.comboBuilder[type]?.id === opt.id ? 'text-brand-gold' : 'text-white/10'}"></i>
+        <i class="fa-solid fa-circle-check text-xs ${state.comboBuilder[type]?.id === opt.id ? 'text-brand-red' : 'text-gray-300'}"></i>
       </div>
     `).join('');
   });
@@ -1220,7 +1220,7 @@ function addChatMessage(content, sender) {
   const msgDiv = document.createElement('div');
   msgDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
   msgDiv.innerHTML = `
-    <div class="${isUser ? 'bg-brand-red text-white' : 'bg-white/10 border border-white/10 text-white'} rounded-2xl ${isUser ? 'rounded-br-xs' : 'rounded-bl-xs'} p-3 max-w-[85%] leading-relaxed text-xs shadow-sm">
+    <div class="${isUser ? 'bg-brand-red text-white' : 'bg-gray-100 text-gray-800 border border-gray-200'} rounded-2xl ${isUser ? 'rounded-br-xs' : 'rounded-bl-xs'} p-2.5 max-w-[85%] leading-relaxed text-xs shadow-sm">
       ${content}
     </div>
   `;
@@ -1279,15 +1279,15 @@ function renderStores(list) {
   if (!container) return;
 
   if (list.length === 0) {
-    container.innerHTML = `<p class="text-[#8E8B9D] text-center py-4">Không tìm thấy cửa hàng phù hợp.</p>`;
+    container.innerHTML = `<p class="text-gray-500 text-center py-4">Không tìm thấy cửa hàng phù hợp.</p>`;
     return;
   }
 
   container.innerHTML = list.map(store => `
-    <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-3 space-y-1">
-      <h4 class="font-heading font-bold text-brand-gold text-xs sm:text-sm"><i class="fa-solid fa-store mr-1"></i> ${store.name}</h4>
-      <p class="text-[#8E8B9D] text-[11px]"><i class="fa-solid fa-location-dot mr-1"></i> ${store.address}</p>
-      <p class="text-white text-[11px]"><i class="fa-solid fa-phone mr-1 text-brand-gold"></i> Hotline: <strong class="text-brand-gold">${store.phone}</strong></p>
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 space-y-1">
+      <h4 class="font-heading font-bold text-brand-red text-xs sm:text-sm"><i class="fa-solid fa-store mr-1"></i> ${store.name}</h4>
+      <p class="text-gray-600 text-[11px]"><i class="fa-solid fa-location-dot mr-1"></i> ${store.address}</p>
+      <p class="text-gray-800 text-[11px]"><i class="fa-solid fa-phone mr-1 text-brand-red"></i> Hotline: <strong class="text-brand-red">${store.phone}</strong></p>
     </div>
   `).join('');
 }
