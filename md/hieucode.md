@@ -434,3 +434,6 @@ Người dùng hỏi chatbot
 ---
 
 > 📌 **Lưu ý:** Mọi thay đổi giao diện (màu sắc, animation, responsive) nằm trong [`style.css`](style.css). Mọi logic và dữ liệu nằm trong [`app.js`](app.js). Bảo mật API nằm trong [`backend/app.py`](backend/app.py).
+
+
+177 và 866 ở index.html là nơi chứa class text-left và 
